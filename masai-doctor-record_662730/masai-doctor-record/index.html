@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masai Doctor Records</title>
+    <style>
+  table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 60%;
+  margin: auto;
+  margin-top: 50px;
+  text-align: center;
+}
+
+table td,
+table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+  form{
+    margin: 5%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+  }
+  #filter{
+    margin-top: -10PX;
+  }
+   body {
+      display: flex;
+      justify-content: space-around;
+    }
+    /* Style to provide some spacing between form and details */
+    form, table {
+      margin: 20px;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- Use this form for data input  -->
+    <form>
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" placeholder="Enter your name" /><br>
+    
+      <label for="doctor_id">Doctor ID:</label><br>
+      <input type="text" id="doctor_id" placeholder="Enter your doctor ID" /><br>
+    
+      <label for="specialization">Specialization:</label><br>
+      <select id="specialization"><br>
+        <option value="">Select Specialization</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="Dentist">Dentist</option>
+        <option value="Gynecologist">Gynecologist</option>
+      </select><br>
+    
+      <label for="experience">Experience:</label> <br>
+      <input type="number" id="experience" placeholder="Enter your experience" /><br>
+    
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" placeholder="Enter your email" /><br>
+    
+      <label for="mobile">Mobile No.:</label><br>
+      <input type="number" id="mobile" placeholder="Enter your mobile number" /><br>
+    
+      <input type="submit" value="Submit" />
+    </form>
+
+    <table>
+      <thead>
+        <tr style="background-color: blue;color:white;">
+          <th>Name</th>
+          <th>Doctor ID</th>
+          <th>Specialization</th>
+          <th>Experience in Years</th>
+          <th>Email</th>
+          <th>Mobile No</th>
+          <th>Role</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Append Rows here using JS & DOM  -->
+      </tbody>
+    </table>
+  </body>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function submitForm() {
+        // Get values from the form
+        var name = document.getElementById('name').value;
+        var doctorID = document.getElementById('doctor_id').value;
+        var specialization = document.getElementById('specialization').value;
+        var experience = document.getElementById('experience').value;
+        var email = document.getElementById('email').value;
+        var mobile = document.getElementById('mobile').value;
+
+        var role = '';
+        if (experience > 5) {
+          role = 'senior';
+        } else if (experience >= 2 && experience <= 5) {
+          role = 'junior';
+        } else {
+          role = 'trainee';
+        }
+
+       
+        var table = document.querySelector("table tbody");
+        var newRow = table.insertRow(table.rows.length);
+        var cells = [
+          newRow.insertCell(0),
+          newRow.insertCell(1),
+          newRow.insertCell(2),
+          newRow.insertCell(3),
+          newRow.insertCell(4),
+          newRow.insertCell(5),
+          newRow.insertCell(6),
+          newRow.insertCell(7),
+        ];
+        cells[0].innerHTML = name;
+        cells[1].innerHTML = doctorID;
+        cells[2].innerHTML = specialization;
+        cells[3].innerHTML = experience;
+        cells[4].innerHTML = email;
+        cells[5].innerHTML = mobile;
+        cells[6].innerHTML = role;
+        cells[7].innerHTML = '<button onclick="deleteRow(this)">Delete</button>';
+      }
+
+      
+      window.deleteRow = function (button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+      };
+
+      
+      document.querySelector('form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        submitForm();
+      });
+    });
+
+
+  
+  </script>
+</html>
